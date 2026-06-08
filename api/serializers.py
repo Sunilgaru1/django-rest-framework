@@ -1,5 +1,8 @@
+# In Serialization Data is Converted in JSON so we get url response in rest_framwork 
 from rest_framework import serializers
+
 from students.models import Student
+from employees.models import Employee
 
 class StudentSerializer(serializers.ModelSerializer):
 
@@ -8,3 +11,8 @@ class StudentSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class EmployeeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Employee
+        fields = "__all__"
