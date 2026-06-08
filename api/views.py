@@ -108,3 +108,11 @@ class Villagers(mixins.ListModelMixin,mixins.CreateModelMixin,generics.GenericAP
     def post(self,request):
         return self.create(request)
 
+class VillagerDetail(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,generics.GenericAPIView):
+    queryset = Villager.objects.all()
+    serializer_class =VillagerSerializer
+
+    def get(self,request,pk):
+        return self.retrieve(request,pk)
+    
+    

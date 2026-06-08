@@ -9,4 +9,5 @@ urlpatterns = [
 
     path('villagers/',views.Villagers.as_view()),
 
+    path('villagers/<int:pk>/',views.VillagerDetail.as_view()),
 ]
