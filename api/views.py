@@ -88,4 +88,9 @@ class EmployeeDetail(APIView):
     def put(self,request,pk):
         employee = self.get_object(pk)
         serializer = EmployeeSerializer(employee,data=request.data)
-        
+
+    def delete(self,request,pk):
+        employee = self.get_object(pk)
+        employee.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
