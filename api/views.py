@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 
 from students.models import Student
-from .serializers import StudentSerializer ,EmployeeSerializer
+from .serializers import StudentSerializer ,EmployeeSerializer,VillagerSerializer
 
 from rest_framework.response import Response
 from rest_framework import status
@@ -14,6 +14,9 @@ from rest_framework.views import APIView
 from employees.models import Employee
 
 from django.http import Http404
+
+from villagers.models import Villager
+from rest_framework import mixins , generics
 # Create your views here.
 
 @api_view(['GET','POST'])
@@ -93,4 +96,15 @@ class EmployeeDetail(APIView):
         employee = self.get_object(pk)
         employee.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class Villagers(mixins.ListModelMixin,mixins.CreateModelMixin,generics.GenericAPIView):
+    queryset = Villager.objects.all()
+    serializer_class =VillagerSerializer
+
+    def get(self,request):
+        return self.list(request)
+    
+    def post(self,request):
+        return self.create(request)
 
