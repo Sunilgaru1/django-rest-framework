@@ -8,6 +8,8 @@ urlpatterns = [
     path('employees/<int:pk>/',views.EmployeeDetail.as_view()),
 
     path('villagers/',views.Villagers.as_view()),
-
     path('villagers/<int:pk>/',views.VillagerDetail.as_view()),
+
+    path('hostellers/',views.Hostellers.as_view()),
+    path('hostellers/<int:pk>/',views.HostellerDetail.as_view()),
 ]

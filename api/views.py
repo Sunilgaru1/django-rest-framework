@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 
 from students.models import Student
-from .serializers import StudentSerializer ,EmployeeSerializer,VillagerSerializer
+from .serializers import StudentSerializer ,EmployeeSerializer,VillagerSerializer,HostellerSerializer
 
 from rest_framework.response import Response
 from rest_framework import status
@@ -16,7 +16,10 @@ from employees.models import Employee
 from django.http import Http404
 
 from villagers.models import Villager
-from rest_framework import mixins , generics
+from rest_framework import mixins
+
+from hostellers.models import Hosteller
+from rest_framework import generics
 # Create your views here.
 
 @api_view(['GET','POST'])
@@ -120,4 +123,12 @@ class VillagerDetail(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixins.De
 
     def delete(self,request,pk):
         return self.destroy(request,pk)
-    
+
+class Hostellers(generics.ListCreateAPIView):
+    queryset = Hosteller.objects.all()
+    serializer_class = HostellerSerializer
+
+class HostellerDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Hosteller.objects.all()
+    serializer_class = HostellerSerializer
+    lookup_field = 'pk'

@@ -4,6 +4,7 @@ from rest_framework import serializers
 from students.models import Student
 from employees.models import Employee
 from villagers.models import Villager
+from hostellers.models import Hosteller
 
 class StudentSerializer(serializers.ModelSerializer):
 
@@ -22,4 +23,10 @@ class VillagerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Villager
+        fields = "__all__"
+
+class HostellerSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Hosteller
         fields = "__all__"
