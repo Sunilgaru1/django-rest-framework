@@ -1,5 +1,10 @@
 from django.urls import path , include
 from . import views
+
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register('employees2',views.Employee2ViewSet,basename='employees2')
 urlpatterns = [
 
     path('students/',views.studentView),
@@ -12,4 +17,7 @@ urlpatterns = [
 
     path('hostellers/',views.Hostellers.as_view()),
     path('hostellers/<int:pk>/',views.HostellerDetail.as_view()),
+
+    path('',include(router.urls))
+
 ]

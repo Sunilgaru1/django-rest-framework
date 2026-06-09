@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 
 from students.models import Student
-from .serializers import StudentSerializer ,EmployeeSerializer,VillagerSerializer,HostellerSerializer
+from .serializers import StudentSerializer ,EmployeeSerializer,VillagerSerializer,HostellerSerializer,Employee2Serializer
 
 from rest_framework.response import Response
 from rest_framework import status
@@ -20,6 +20,11 @@ from rest_framework import mixins
 
 from hostellers.models import Hosteller
 from rest_framework import generics
+
+from employess2.models import Employee2
+from rest_framework import viewsets
+
+from django.shortcuts import get_object_or_404
 # Create your views here.
 
 @api_view(['GET','POST'])
@@ -132,3 +137,34 @@ class HostellerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Hosteller.objects.all()
     serializer_class = HostellerSerializer
     lookup_field = 'pk'
+
+class Employee2ViewSet(viewsets.ViewSet):
+    def list(self,request):
+        queryset = Employee2.objects.all()
+        serializer = Employee2Serializer(queryset,many = True)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+    
+    def create(self,request):
+        serializer = Employee2Serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data , status=status.HTTP_201_CREATED)
+        
+    def retrieve(self,request,pk=None):
+        employee2 = get_object_or_404(Employee2,pk=pk)
+        serializer = Employee2Serializer(employee2)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+    
+    def update(self,request,pk=None):
+        employee2 = get_object_or_404(Employee2,pk=pk)
+        serializer = Employee2Serializer(employee2,data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        
+    def delete(self,request,pk=None):
+        employee = get_object_or_404(Employee2,pk=pk)
+        employee.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'api',
     'employees',
     'villagers',
-    'hostellers'
+    'hostellers',
+    'employess2',
 ]
 
 MIDDLEWARE = [
