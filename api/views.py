@@ -201,7 +201,7 @@ class Employee2ViewSet(viewsets.ModelViewSet):
     serializer_class = Employee2Serializer
     pagination_class = CustomPagination
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['designation']
+    filterset_class = Employee2Filter
 
 
 # NESTED VIEWS
