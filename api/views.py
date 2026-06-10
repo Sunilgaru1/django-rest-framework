@@ -25,7 +25,13 @@ from employess2.models import Employee2
 from rest_framework import viewsets
 
 from django.shortcuts import get_object_or_404
+
+from blogs.models import Blog,Comment
+from blogs.serializers import BlogSerializer,CommentSerializer
 # Create your views here.
+
+# MANUAL SERIALIZER USING LIST FUNCTION
+
 
 
 # FUNCTION BASED VIEWS
@@ -186,3 +192,14 @@ class HostellerDetail(generics.RetrieveUpdateDestroyAPIView):
 class Employee2ViewSet(viewsets.ModelViewSet):
     queryset = Employee2.objects.all()
     serializer_class = Employee2Serializer
+
+
+
+# NESTED VIEWS
+class BlogsView(generics.ListCreateAPIView):
+    queryset = Blog.objects.all()
+    serializer_class = BlogSerializer
+
+class CommentsView(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
