@@ -30,7 +30,9 @@ from blogs.models import Blog,Comment
 from blogs.serializers import BlogSerializer,CommentSerializer
 
 from .paginations import CustomPagination
+from django_filters.rest_framework import DjangoFilterBackend
 
+from employess2.filters import Employee2Filter
 # Create your views here.
 
 # MANUAL SERIALIZER USING LIST FUNCTION
@@ -193,12 +195,13 @@ class HostellerDetail(generics.RetrieveUpdateDestroyAPIView):
 'MODEL_VIEWSET'
 
 # PAGINATION 
-
+# FILTERRING
 class Employee2ViewSet(viewsets.ModelViewSet):
     queryset = Employee2.objects.all()
     serializer_class = Employee2Serializer
     pagination_class = CustomPagination
-
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['designation']
 
 
 # NESTED VIEWS
