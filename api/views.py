@@ -28,6 +28,9 @@ from django.shortcuts import get_object_or_404
 
 from blogs.models import Blog,Comment
 from blogs.serializers import BlogSerializer,CommentSerializer
+
+from .paginations import CustomPagination
+
 # Create your views here.
 
 # MANUAL SERIALIZER USING LIST FUNCTION
@@ -189,9 +192,12 @@ class HostellerDetail(generics.RetrieveUpdateDestroyAPIView):
 
 'MODEL_VIEWSET'
 
+# PAGINATION 
+
 class Employee2ViewSet(viewsets.ModelViewSet):
     queryset = Employee2.objects.all()
     serializer_class = Employee2Serializer
+    pagination_class = CustomPagination
 
 
 
